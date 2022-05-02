@@ -17,14 +17,16 @@ The schema of the datalake is as follows: <br>
   
 ## Dimension Tables
 <ol>
-users - users in the app
+<li> users - users in the app
   <ol>
     <li> user_id, <li> first_name, <li> last_name, <li> gender, <li> level
     </ol>
   </ol>
-<ol> songs - songs in music database
+<ol> 
+  <li> songs - songs in music database
+    <ol>
 <li> song_id, <li> title, <li> artist_id, <li> year, <li> duration
-    </ol>
+    </ol></ol>
 <ol> artists - artists in music database
 <li> artist_id, <li> name, <li> location, <li> lattitude, <li> longitude
 </ol>
