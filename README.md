@@ -21,18 +21,19 @@ The schema of the datalake is as follows: <br>
   <ol>
     <li> user_id, <li> first_name, <li> last_name, <li> gender, <li> level
     </ol>
-  </ol>
 <ol> 
   <li> songs - songs in music database
     <ol>
 <li> song_id, <li> title, <li> artist_id, <li> year, <li> duration
-    </ol></ol>
-<ol> artists - artists in music database
+    </ol>
+<li> artists - artists in music database
+  <ol>
 <li> artist_id, <li> name, <li> location, <li> lattitude, <li> longitude
 </ol>
-    <ol> time - timestamps of records in songplays broken down into specific units
+    <li> time - timestamps of records in songplays broken down into specific units
+      <ol>
 <li> start_time, <li> hour, <li> day, <li> week, <li> month, <li> year, <li> weekday 
-</ol>
+      </ol></ol>
 
 # ELT pipeline:
 <p>
