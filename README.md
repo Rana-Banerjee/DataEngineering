@@ -20,12 +20,14 @@ The schema of the datalake is as follows: <br>
 <li>users - users in the app
   <ol>
     <li> user_id, <li> first_name, <li> last_name, <li> gender, <li> level
-<li>songs - songs in music database
-song_id, title, artist_id, year, duration
-<li>artists - artists in music database
-artist_id, name, location, lattitude, longitude
-<li>time - timestamps of records in songplays broken down into specific units
-start_time, hour, day, week, month, year, weekday </p>
+<ol> songs - songs in music database
+<li> song_id, <li> title, <li> artist_id, <li> year, <li> duration
+    </ol>
+<ol> artists - artists in music database
+<li> artist_id, <li> name, <li> location, <li> lattitude, <li> longitude
+</ol>
+    <ol> time - timestamps of records in songplays broken down into specific units
+<li> start_time, <li> hour, <li> day, <li> week, <li> month, <li> year, <li> weekday 
 </ol>
 
 # ELT pipeline:
