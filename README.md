@@ -21,7 +21,6 @@ The schema of the datalake is as follows: <br>
   <ol>
     <li> user_id, <li> first_name, <li> last_name, <li> gender, <li> level
     </ol>
-<ol> 
   <li> songs - songs in music database
     <ol>
 <li> song_id, <li> title, <li> artist_id, <li> year, <li> duration
