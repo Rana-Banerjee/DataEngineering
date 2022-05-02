@@ -14,10 +14,12 @@ The schema of the datalake is as follows: <br>
 <ol> 
   <li> songplay_id, <li> start_time, <li> user_id, <li> level, <li> song_id, <li> artist_id, <li> session_id, <li> location, <li> user_agent</ol>
   </ol>
+  
 ## Dimension Tables
 <ol>
 <li>users - users in the app
-user_id, first_name, last_name, gender, level
+  <ol>
+    <li> user_id, <li> first_name, <li> last_name, <li> gender, <li> level
 <li>songs - songs in music database
 song_id, title, artist_id, year, duration
 <li>artists - artists in music database
