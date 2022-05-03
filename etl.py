@@ -5,6 +5,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import udf, col
 from pyspark.sql.functions import year, month, dayofmonth, hour, weekofyear, date_format, dayofweek
 from pyspark.sql import types
+from pyspark.sql.functions import monotonically_increasing_id
 
 
 config = configparser.ConfigParser()
@@ -23,6 +24,14 @@ def create_spark_session():
 
 
 def process_song_data(spark, input_data, output_data):
+  """
+  This function processes the song data and creates and saves the song and the artist fact tables
+  Returns: None
+  Arguments:
+    spark: spark session context
+    input_data: the base path of the s3 bucket where the song data is stored
+    output_data: the base path to the bucket where the output tables/parquet files would be stored
+  """
     # get filepath to song data file
     song_data = os.path.join(input_data ,'song_data/*/*/*/*.json')
 #     song_data = os.path.join(input_data ,'song_data/A/A/A/*.json')
@@ -44,6 +53,14 @@ def process_song_data(spark, input_data, output_data):
 
 
 def process_log_data(spark, input_data, output_data):
+  """
+  This function processes the log data, creates time table, joins with song table and creates the song plays dimension table
+  Returns: None
+  Arguments:
+    spark: spark session context
+    input_data: the base path of the s3 bucket where the log data is stored
+    output_data: the base path to the bucket where the output tables/parquet files would be stored
+  """
     # get filepath to log data file
     log_data = os.path.join(input_data ,'log_data/*/*/*.json')
 #     log_data = os.path.join(input_data ,'log_data/2018/11/*.json')
@@ -86,7 +103,6 @@ def process_log_data(spark, input_data, output_data):
     # extract columns from joined song and log datasets to create songplays table 
     songplays_table = df.join(song_df, (df.song == song_df.title) & (df.artist==song_df.artist_name),'inner')
     
-    from pyspark.sql.functions import monotonically_increasing_id
     songplays_table=songplays_table.withColumn('songplay_id',monotonically_increasing_id())
     
     songplays_table=songplays_table.selectExpr(['songplay_id', 'timestamp as start_time',
