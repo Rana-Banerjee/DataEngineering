@@ -4,6 +4,7 @@ import os
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import udf, col
 from pyspark.sql.functions import year, month, dayofmonth, hour, weekofyear, date_format, dayofweek
+from pyspark.sql import types
 
 
 config = configparser.ConfigParser()
@@ -24,6 +25,7 @@ def create_spark_session():
 def process_song_data(spark, input_data, output_data):
     # get filepath to song data file
     song_data = os.path.join(input_data ,'song_data/*/*/*/*.json')
+#     song_data = os.path.join(input_data ,'song_data/A/A/A/*.json')
     
     # read song data file
     df = spark.read.json(song_data)
@@ -44,6 +46,7 @@ def process_song_data(spark, input_data, output_data):
 def process_log_data(spark, input_data, output_data):
     # get filepath to log data file
     log_data = os.path.join(input_data ,'log_data/*/*/*.json')
+#     log_data = os.path.join(input_data ,'log_data/2018/11/*.json')
 
     # read log data file
     df = spark.read.json(log_data)
@@ -58,9 +61,8 @@ def process_log_data(spark, input_data, output_data):
     artists_table.write.mode("overwrite").parquet(output_data + "user_table.parquet")
 
     # create timestamp column from original timestamp column
-    from pyspark.sql import types
-    @udf (types.DateType())
-    def get_datetime(ts):
+    @udf (types.TimestampType())
+    def get_timestamp(ts):
         return datetime.fromtimestamp(ts/1000)
     df = df.withColumn('timestamp', get_timestamp('ts'))
     
@@ -68,7 +70,7 @@ def process_log_data(spark, input_data, output_data):
     @udf (types.DateType())
     def get_datetime(ts):
         return datetime.fromtimestamp(ts/1000)
-    df = df.withColumn('datetime', get_timestamp(df.ts))
+    df = df.withColumn('datetime', get_datetime(df.ts))
     
     # extract columns to create time table
     time_table = df.selectExpr(['timestamp as start_time','hour(timestamp) as hour', 'dayofmonth(timestamp) as day', 
