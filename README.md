@@ -38,3 +38,7 @@ The schema of the datalake is as follows: <br>
 <p>
 The ELT pipeline first processes the song data and the log_data to create the Dimension Tables <br>
 The songplays fact table is then created by joining and filtering the relevant dimension tables </p>
+
+# How to run the script
+Execute the following command from within a spark cluster:  
+`python etl.py`
